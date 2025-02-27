@@ -11,16 +11,16 @@ st.set_page_config(page_title="Tanglish LoveBot 💖", layout="centered")
 [theme]
 
 # Primary accent for interactive elements
-primaryColor = '#7792E3'
+primaryColor = '#F63366'
 
 # Background color for the main content area
-backgroundColor = '#273346'
+backgroundColor = '#FFD1DC'
 
 # Background color for sidebar and most interactive widgets
-secondaryBackgroundColor = '#B9F1C0'
+secondaryBackgroundColor = '#FFC0CB'
 
 # Color used for almost all text
-textColor = '#FFFFFF'
+textColor = '#000000'
 
 # Font family for all text in the app, except code blocks
 # Accepted values (serif | sans serif | monospace) 
