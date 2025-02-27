@@ -8,37 +8,24 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 # ❤️ Streamlit Page Configuration
 st.set_page_config(page_title="Tanglish LoveBot 💖", layout="centered")
 
-# 💕 Custom Love-Themed CSS for Styling
-st.markdown("""
-    <style>
-    body {
-        background-color: #ffeff6;
-        font-family: 'Arial', sans-serif;
-    }
-    .stChatMessage {
-        padding: 10px;
-        border-radius: 15px;
-    }
-    .user {
-        background-color: #ff99cc;
-        color: white;
-        text-align: right;
-    }
-    .assistant {
-        background-color: #ffd9e6;
-        color: black;
-    }
-    .heart {
-        color: #ff007f;
-    }
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-    </style>
-""", unsafe_allow_html=True)
+[theme]
+
+# Primary accent for interactive elements
+primaryColor = '#7792E3'
+
+# Background color for the main content area
+backgroundColor = '#273346'
+
+# Background color for sidebar and most interactive widgets
+secondaryBackgroundColor = '#B9F1C0'
+
+# Color used for almost all text
+textColor = '#FFFFFF'
+
+# Font family for all text in the app, except code blocks
+# Accepted values (serif | sans serif | monospace) 
+# Default: "sans serif"
+font = "sans serif"
 
 # 💖 Chatbot Title & Header
 st.markdown("<h1 style='text-align: center; color: #ff007f;'>💖 Tanglish LoveBot 😘🔥</h1>", unsafe_allow_html=True)
