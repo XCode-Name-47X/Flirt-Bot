@@ -1,6 +1,7 @@
 [theme]
-primaryColor = "#F63366"
-backgroundColor = "#FFD1DC"
-secondaryBackgroundColor = "#FFC0CB"
-textColor = "#000000"
+[theme]
+primaryColor = "#FF4081"  # Bright pink for accents (buttons, sliders)
+backgroundColor = "#FFE4E1"  # Soft pinkish-white for a dreamy feel
+secondaryBackgroundColor = "#FFC0CB"  # Light pink for contrast
+textColor = "#4A154B"  # Deep romantic purple for better readability
 font = "sans serif"
