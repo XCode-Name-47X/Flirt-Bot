@@ -12,34 +12,53 @@ st.set_page_config(page_title="LoveChat AI", layout="centered")
 st.markdown("""
     <style>
     body {
-        background-color: #fff5f8;
+        background-color: #fff0f6;
         font-family: 'Arial', sans-serif;
-    }
-    .stChatMessage {
-        padding: 10px;
-        border-radius: 10px;
-    }
-    .user {
-        background-color: #ffccd5;
-        color: black;
-        text-align: right;
-    }
-    .assistant {
-        background-color: #ffe4eb;
-        color: black;
-    }
-    .container {
         display: flex;
         justify-content: center;
-        align-items: center;
-        flex-direction: column;
+    }
+    .chat-container {
+        background-color: white;
+        width: 350px;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .stChatMessage {
+        padding: 8px 12px;
+        border-radius: 20px;
+        margin: 5px 0;
+        display: inline-block;
+    }
+    .user {
+        background-color: #ff85a2;
+        color: white;
+        text-align: right;
+        float: right;
+    }
+    .assistant {
+        background-color: #ffe6eb;
+        color: black;
+        text-align: left;
+        float: left;
+    }
+    .chat-input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 20px;
+        border: 1px solid #ff85a2;
+        outline: none;
     }
     </style>
 """, unsafe_allow_html=True)
 
 # Chatbot Title & Header
-st.markdown("""<h1 style='text-align: center; color: #d63384;'>LoveChat AI</h1>""", unsafe_allow_html=True)
-st.markdown("""<h4 style='text-align: center;'>Hey there! Ready for a fun chat?</h4>""", unsafe_allow_html=True)
+st.markdown("""
+    <div style='text-align: center;'>
+        <h1 style='color: #ff4d6d;'>LoveChat AI</h1>
+        <p>Hey there! Ready for a fun chat?</p>
+    </div>
+""", unsafe_allow_html=True)
 
 # Gemini API Initialization (Replace API Key)
 API_KEY = "AIzaSyDsr0YwjzM6pQMYfFgv0EhDAyQNaXBGXvA"
@@ -72,8 +91,9 @@ if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
 # Chat Input Box
-st.markdown("<h4>Chat with LoveChat AI:</h4>", unsafe_allow_html=True)
-user_input = st.text_input(" ", placeholder="Type your message...")
+st.markdown("<div class='chat-container'>", unsafe_allow_html=True)
+user_input = st.text_input("", placeholder="Type your message...", key="chat_input", label_visibility="collapsed", help="Chat with LoveChat AI")
+st.markdown("</div>", unsafe_allow_html=True)
 
 # Process User Input
 if user_input:
@@ -86,13 +106,18 @@ if user_input:
     st.session_state.chat_history.append(("Chatbot", response))
 
 # Display Chat History
-st.markdown("<h4>Chat History:</h4>", unsafe_allow_html=True)
+st.markdown("<div class='chat-container'>", unsafe_allow_html=True)
 for sender, message in st.session_state.chat_history:
     with st.chat_message("user" if sender == "You" else "assistant"):
         if sender == "You":
             st.markdown(f"<div class='stChatMessage user'><b>You:</b> {message}</div>", unsafe_allow_html=True)
         else:
             st.markdown(f"<div class='stChatMessage assistant'><b>Chatbot:</b> {message}</div>", unsafe_allow_html=True)
+st.markdown("</div>", unsafe_allow_html=True)
 
 # End Message
-st.markdown("""<h5 style='text-align: center; color: #d63384;'>Keep the conversation going!</h5>""", unsafe_allow_html=True)
+st.markdown("""
+    <div style='text-align: center;'>
+        <p style='color: #ff4d6d;'>Keep the conversation going!</p>
+    </div>
+""", unsafe_allow_html=True)
