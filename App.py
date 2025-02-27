@@ -8,24 +8,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 # ❤️ Streamlit Page Configuration
 st.set_page_config(page_title="Tanglish LoveBot 💖", layout="centered")
 
-[theme]
 
-# Primary accent for interactive elements
-primaryColor = '#F63366'
-
-# Background color for the main content area
-backgroundColor = '#FFD1DC'
-
-# Background color for sidebar and most interactive widgets
-secondaryBackgroundColor = '#FFC0CB'
-
-# Color used for almost all text
-textColor = '#000000'
-
-# Font family for all text in the app, except code blocks
-# Accepted values (serif | sans serif | monospace) 
-# Default: "sans serif"
-font = "sans serif"
 
 # 💖 Chatbot Title & Header
 st.markdown("<h1 style='text-align: center; color: #ff007f;'>💖 Tanglish LoveBot 😘🔥</h1>", unsafe_allow_html=True)
