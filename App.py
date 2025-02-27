@@ -8,41 +8,61 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 # ❤️ Streamlit Page Configuration
 st.set_page_config(page_title="Tanglish LoveBot 💖", layout="centered")
 
-# 💕 Custom Love-Themed CSS for Styling
+# 💕 Custom Love-Themed CSS for UI Styling
 st.markdown("""
     <style>
     body {
-        background-color: #ffeff6;
+        background-color: #ffe6f2;
         font-family: 'Arial', sans-serif;
     }
-    .stChatMessage {
-        padding: 10px;
-        border-radius: 15px;
+    .chat-container {
+        max-width: 400px;
+        margin: auto;
+    }
+    .chat-bubble {
+        padding: 12px;
+        border-radius: 20px;
+        margin: 5px 0;
+        display: inline-block;
+        max-width: 80%;
     }
     .user {
-        background-color: #ff99cc;
+        background-color: #ff3366;
         color: white;
         text-align: right;
+        float: right;
     }
-    .assistant {
-        background-color: #ffd9e6;
+    .bot {
+        background-color: #ffccd5;
         color: black;
+        float: left;
     }
-    .heart {
-        color: #ff007f;
+    .input-box {
+        width: 100%;
+        padding: 10px;
+        border-radius: 15px;
+        border: 1px solid #ff6699;
+        margin-top: 10px;
     }
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
+    .send-btn {
+        background-color: #ff3366;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 5px;
     }
     </style>
 """, unsafe_allow_html=True)
 
 # 💖 Chatbot Title & Header
-st.markdown("<h1 style='text-align: center; color: #ff007f;'>💖 Tanglish LoveBot 😘🔥</h1>", unsafe_allow_html=True)
-st.markdown("<h4 style='text-align: center;'>Hey Cutie! Pesalama? 😉💬</h4>", unsafe_allow_html=True)
+st.markdown("""
+    <div style='text-align: center;'>
+        <h1 style='color: #ff3366;'>💖 Tanglish LoveBot 😘🔥</h1>
+        <h4>Hey Cutie! Pesalama? 😉💬</h4>
+    </div>
+""", unsafe_allow_html=True)
 
 # 📝 Get User Info (Name & Gender)
 if "user_name" not in st.session_state:
@@ -55,16 +75,15 @@ with st.form("user_info_form"):
     st.session_state.user_gender = st.radio("💞 Your Gender:", ["Male", "Female"], index=0 if st.session_state.user_gender == "Male" else 1)
     submitted = st.form_submit_button("Start Chat 💌")
 
-# 🛑 Don't proceed until user inputs their name & gender
 if not st.session_state.user_name:
     st.warning("💖 Pease enter your name to start chatting!")
     st.stop()
 
-# 🎤 Gemini API Initialization (Replace API Key)
-API_KEY = "AIzaSyDsr0YwjzM6pQMYfFgv0EhDAyQNaXBGXvA"  # Securely replace with actual key
+# 🎤 Gemini API Initialization
+API_KEY = "AIzaSyDsr0YwjzM6pQMYfFgv0EhDAyQNaXBGXvA"
 llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro", api_key=API_KEY, temperature=0.9, top_p=0.95)
 
-# 💌 Flirty Chatbot Prompt Template (Now Personalized)
+# 💌 Flirty Chatbot Prompt Template
 flirty_prompt = """
 You are a **fun, witty, and flirty AI chatbot** who speaks in **Tanglish (Tamil + English)**. Your goal is to make the user **feel special, engage in playful banter, and keep the conversation fun and romantic.**  
 
@@ -85,10 +104,8 @@ User: {user_input}
 Chatbot:
 """
 
-# 🧠 Add Memory for Better Context Retention
+# 🧠 Add Memory for Context Retention
 memory = ConversationBufferMemory(memory_key="chat_history", input_key="user_input")
-
-# 🔥 Create chatbot chain with memory
 prompt = PromptTemplate(template=flirty_prompt, input_variables=["user_input", "user_name", "user_gender"])
 chatbot_chain = LLMChain(prompt=prompt, llm=llm, memory=memory)
 
@@ -96,28 +113,29 @@ chatbot_chain = LLMChain(prompt=prompt, llm=llm, memory=memory)
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
-# 💌 Love-Themed Chat Input Box
-st.markdown(f"<h4>💬 {st.session_state.user_name}, Your Message:</h4>", unsafe_allow_html=True)
-user_input = st.text_input(" ", placeholder="Type something romantic... 😘", label_visibility="collapsed")
+# 🎤 Chat Input
+st.markdown("<div class='chat-container'>", unsafe_allow_html=True)
+user_input = st.text_input(" ", placeholder="Type something romantic... 😘", key="chat_input", label_visibility="collapsed")
+st.markdown("</div>", unsafe_allow_html=True)
 
-# 🚀 Process User Input
-if user_input:
-    with st.spinner("Thinking... 😍"):
-        time.sleep(1)  # Simulate typing delay
-        response = chatbot_chain.run(user_input=user_input, user_name=st.session_state.user_name, user_gender=st.session_state.user_gender)
-    
-    # Store Chat History
-    st.session_state.chat_history.append(("You", user_input))
-    st.session_state.chat_history.append(("Chatbot", response))
+if st.button("Send 💌", key="send", help="Send your message!"):
+    if user_input:
+        with st.spinner("Thinking... 😍"):
+            time.sleep(1)
+            response = chatbot_chain.run(user_input=user_input, user_name=st.session_state.user_name, user_gender=st.session_state.user_gender)
+        
+        # Store Chat History
+        st.session_state.chat_history.append(("You", user_input))
+        st.session_state.chat_history.append(("Chatbot", response))
 
 # 🥰 Display Chat History
-st.markdown("<h4>💞 Chat History:</h4>", unsafe_allow_html=True)
+st.markdown("<div class='chat-container'>", unsafe_allow_html=True)
 for sender, message in st.session_state.chat_history:
-    with st.chat_message("user" if sender == "You" else "assistant"):
-        if sender == "You":
-            st.markdown(f"<div class='stChatMessage user'><b>You:</b> {message} 😘</div>", unsafe_allow_html=True)
-        else:
-            st.markdown(f"<div class='stChatMessage assistant'><b>Chatbot:</b> {message} ❤️</div>", unsafe_allow_html=True)
+    if sender == "You":
+        st.markdown(f"<div class='chat-bubble user'><b>You:</b> {message} 😘</div>", unsafe_allow_html=True)
+    else:
+        st.markdown(f"<div class='chat-bubble bot'><b>Chatbot:</b> {message} ❤️</div>", unsafe_allow_html=True)
+st.markdown("</div>", unsafe_allow_html=True)
 
 # 🔚 End Message
-st.markdown(f"<h5 style='text-align: center; color: #ff007f;'>💖 {st.session_state.user_name}, Let's keep flirting! 😉🔥</h5>", unsafe_allow_html=True)
+st.markdown(f"<h5 style='text-align: center; color: #ff3366;'>💖 {st.session_state.user_name}, Let's keep flirting! 😉🔥</h5>", unsafe_allow_html=True)
