@@ -45,7 +45,7 @@ st.markdown("<h1 style='text-align: center; color: #ff007f;'>💖 Tanglish LoveB
 st.markdown("<h4 style='text-align: center;'>Hey Cutie! Pesalama? 😉💬</h4>", unsafe_allow_html=True)
 
 # 🎤 Gemini API Initialization (Replace API Key)
-API_KEY = "YOUR_GEMINI_API_KEY"  # Securely replace with actual key
+API_KEY = "AIzaSyDsr0YwjzM6pQMYfFgv0EhDAyQNaXBGXvA"  # Securely replace with actual key
 llm = ChatGoogleGenerativeAI(model="gemini-2.0-pro-exp-02-05", api_key=API_KEY, temperature=0.9, top_p=0.95)
 
 # 💌 Flirty Chatbot Prompt Template
