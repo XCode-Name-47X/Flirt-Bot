@@ -6,12 +6,12 @@ from langchain.memory import ConversationBufferMemory
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 # ❤️ Streamlit Page Configuration
-st.set_page_config(page_title="Neera 💖", layout="centered")
+st.set_page_config(page_title="Thanglish Bot 💖", layout="centered")
 
 
 
 # 💖 Chatbot Title & Header
-st.markdown("<h1 style='text-align: center; color: #ff007f;'>Neeraa 💖</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #ff007f;'>Thanglish Bot 💖</h1>", unsafe_allow_html=True)
 st.markdown("<h4 style='text-align: center;'>Hey Cutie! Pesalama? 😉💬</h4>", unsafe_allow_html=True)
 
 # 🎤 Gemini API Initialization (Replace API Key)
