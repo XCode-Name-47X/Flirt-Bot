@@ -6,7 +6,7 @@ from langchain.memory import ConversationBufferMemory
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 # ❤️ Streamlit Page Configuration
-st.set_page_config(page_title="Tanglish LoveBot 💖", layout="centered")
+st.set_page_config(page_title="Neera 💖", layout="centered")
 
 
 
